@@ -54,9 +54,12 @@ Class smush {
 		foreach ($it as $file) {
 			$path = $file->getPathname();
 
+			// if it's a folder, scan it too
+			if ($file->isDir() && !$file->isDot())
+				self::folder($curl, $path, $regexp, $quiet);
 			// smush jpg, jpeg and png images
 			// gif images are converted to gifs if option is setted
-			if (preg_match($regexp, $path)) {
+			elseif (preg_match($regexp, $path)) {
 				self::file($curl, $path, $regexp, $quiet);
 
 				if (!$quiet)
@@ -123,7 +126,7 @@ Class smush {
 
 						$path = substr($path, 0, -3) . 'png';
 					}
-
+return true;
 					$content = file_get_contents($data->dest);
 					return file_put_contents($path, $content);
 				}

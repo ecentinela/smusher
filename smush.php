@@ -118,7 +118,7 @@ Class smush {
 				}
 				else {
 					if (!$quiet)
-						echo "  " . $data->src_size . " -> " . $data->dest_size . "	= " . round($data->dest_size * 100 / $data->src_size) . "%\n";
+						echo "  " . $data->src_size . " -> " . $data->dest_size . " = " . round($data->dest_size * 100 / $data->src_size) . "%\n";
 
 					// if it's a gif image it is converted to a png file
 					if (preg_match('/\.gif$/i', $path)) {

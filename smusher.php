@@ -3,19 +3,18 @@
 function help() {
 	echo "Optimize a single image or a whole folder in the cloud.\n";
 	echo "\n";
-	echo "gif`s:\n";
+	echo "gif's:\n";
 	echo "  - called with a folder gif`s will not be optimized\n";
 	echo "  - called on a singe .gif, it will be optimized if it is optimizeable\n";
 	echo "\n";
 	echo "Usage:\n";
-	echo "  php smusher.php /apps/x/public/images [options]\n";
-	echo "  php smusher.php /apps/x/public/images/x.png [options]\n";
-	echo "  php smusher.php /apps/x/public/images/*.png [options]\n";
+	echo "  php smusher.php /images [options]\n";
+	echo "  php smusher.php /images/x.png [options]\n";
 	echo "\n";
 	echo "Options are:\n";
-	echo "  -q, --quiet		no output\n";
-	echo "  -c, --convert-gifs	convert all .gif`s in the given folder\n";
-	echo "  -h, --help		show this\n";
+	echo str_pad("  -q, --quiet", 26, " ") . "no output\n";
+	echo str_pad("  -c, --convert-gifs", 26, " ") . "convert all .gif's in the given folder\n";
+	echo str_pad("  -h, --help", 26, " ") . "show this\n";
 
 	exit;
 }

@@ -16,8 +16,8 @@ Optimize a single image or a whole folder in the cloud.
 converting gif-s to png-s if specified on the arguments:
 
 Usage:
-    smusher /images [options]
-    smusher /images/x.png [options]
+    php smusher.php /images [options]
+    php smusher.php /images/x.png [options]
 
 Options are:
     -q, --quiet                      no output

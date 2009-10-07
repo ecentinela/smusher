@@ -8,9 +8,9 @@ function help() {
 	echo "  - called on a singe .gif, it will be optimized if it is optimizeable\n";
 	echo "\n";
 	echo "Usage:\n";
-	echo "  php smushit.php /apps/x/public/images [options]\n";
-	echo "  php smushit.php /apps/x/public/images/x.png [options]\n";
-	echo "  php smushit.php /apps/x/public/images/*.png [options]\n";
+	echo "  php smusher.php /apps/x/public/images [options]\n";
+	echo "  php smusher.php /apps/x/public/images/x.png [options]\n";
+	echo "  php smusher.php /apps/x/public/images/*.png [options]\n";
 	echo "\n";
 	echo "Options are:\n";
 	echo "  -q, --quiet		no output\n";

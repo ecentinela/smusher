@@ -20,15 +20,15 @@ function help() {
 	exit;
 }
 
-array_shift($argv);
-
-if (count($argv) == 0)
+if ($argc == 1)
 	help();
 
 require_once 'smush.php';
 
 $options = array();
 $path = false;
+
+array_shift($argv);
 
 foreach ($argv as $arg)
 	switch ($arg) {

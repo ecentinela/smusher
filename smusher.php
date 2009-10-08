@@ -14,6 +14,7 @@ function help() {
 	echo "Options are:\n";
 	echo str_pad("  -q, --quiet", 26, " ") . "no output\n";
 	echo str_pad("  -c, --convert-gifs", 26, " ") . "convert all .gif's in the given folder\n";
+	echo str_pad("  -pc, --pretend", 26, " ") . "no changes are made\n";
 	echo str_pad("  -h, --help", 26, " ") . "show this\n";
 
 	exit;
@@ -39,6 +40,11 @@ foreach ($argv as $arg)
 		case '--quiet':
 		case '-q':
 			$options[] = 'quiet';
+			break;
+
+		case '--pretend':
+		case '-p':
+			$options[] = 'pretend';
 			break;
 
 		default:

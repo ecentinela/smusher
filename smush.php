@@ -25,6 +25,7 @@ Class smush {
 	static function it($path, $options = array()) {
 		$regexp = in_array('gifs', $options) ? '/\.(jpg|jpeg|png|gif)$/i' : '/\.(jpg|jpeg|png)$/i';
 		$quiet = in_array('quiet', $options);
+		$pretend = in_array('pretend', $options);
 
 		// create the curl object
 		$curl = curl_init(self::url);
@@ -39,7 +40,7 @@ Class smush {
 		$fn = is_dir($path) ? 'folder' : 'file';
 
 		// call the method
-		call_user_func('smush::' . $fn, $curl, $path, $regexp, $quiet);
+		call_user_func('smush::' . $fn, $curl, $path, $regexp, $quiet, $pretend);
 
 		// close curl to free memory
 		curl_close($curl);
@@ -47,7 +48,7 @@ Class smush {
 
 	/*
 	*/
-	private static function folder($curl, $path, $regexp, $quiet) {
+	private static function folder($curl, $path, $regexp, $quiet, $pretend) {
 		// loop through all files on the folder to get images
 		$it = new DirectoryIterator($path);
 
@@ -60,7 +61,7 @@ Class smush {
 			// smush jpg, jpeg and png images
 			// gif images are converted to gifs if option is setted
 			elseif (preg_match($regexp, $path)) {
-				self::file($curl, $path, $regexp, $quiet);
+				self::file($curl, $path, $regexp, $quiet, $pretend);
 
 				if (!$quiet)
 					echo "\n";
@@ -70,7 +71,7 @@ Class smush {
 
 	/*
 	*/
-	private static function file($curl, $path, $regexp, $quiet) {
+	private static function file($curl, $path, $regexp, $quiet, $pretend) {
 		// check that the file exists
 		if (!file_exists($path))
 			trigger_error('Invalid file path: ' . $path, E_USER_ERROR);
@@ -127,7 +128,11 @@ Class smush {
 						$path = substr($path, 0, -3) . 'png';
 					}
 
+					if ($pretend)
+						return true;
+
 					$content = file_get_contents($data->dest);
+
 					return file_put_contents($path, $content);
 				}
 			}

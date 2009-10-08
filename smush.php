@@ -57,7 +57,7 @@ Class smush {
 
 			// if it's a folder, scan it too
 			if ($file->isDir() && !$file->isDot())
-				self::folder($curl, $path, $regexp, $quiet);
+				self::folder($curl, $path, $regexp, $quiet, $pretend);
 			// smush jpg, jpeg and png images
 			// gif images are converted to gifs if option is setted
 			elseif (preg_match($regexp, $path)) {

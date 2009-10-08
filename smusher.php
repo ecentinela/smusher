@@ -20,7 +20,7 @@ function help() {
 	exit;
 }
 
-if ($argc == 1)
+if ($_SERVER['argc'] == 1)
 	help();
 
 require_once 'smush.php';
@@ -28,9 +28,9 @@ require_once 'smush.php';
 $options = array();
 $path = false;
 
-array_shift($argv);
+$arguments = array_splice($_SERVER['argv'], 1);
 
-foreach ($argv as $arg)
+foreach ($arguments as $arg)
 	switch ($arg) {
 		case '--convert-gifs':
 		case '-c':

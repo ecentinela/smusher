@@ -30,7 +30,12 @@ $path = false;
 
 $arguments = array_splice($_SERVER['argv'], 1);
 
-foreach ($arguments as $arg)
+foreach ($arguments as $arg) {
+	$is_option = preg_match('/^-/', $arg);
+
+	if ($is_option && !$path)
+		help();
+
 	switch ($arg) {
 		case '--convert-gifs':
 		case '-c':
@@ -48,11 +53,12 @@ foreach ($arguments as $arg)
 			break;
 
 		default:
-			if (preg_match('/^-/', $arg))
+			if ($is_option || $path)
 				help();
 
 			$path = $arg;
 	}
+}
 
 smush::it($path, $options);
 

@@ -15,6 +15,7 @@ function help() {
 	echo str_pad("  -q, --quiet", 26, " ") . "no output\n";
 	echo str_pad("  -c, --convert-gifs", 26, " ") . "convert all .gif's in the given folder\n";
 	echo str_pad("  -pc, --pretend", 26, " ") . "no changes are made\n";
+	echo str_pad("  -r, --recursive", 26, " ") . "execute the action on all subdirectories\n";
 	echo str_pad("  -h, --help", 26, " ") . "show this\n";
 
 	exit;
@@ -50,6 +51,11 @@ foreach ($arguments as $arg) {
 		case '--pretend':
 		case '-p':
 			$options[] = 'pretend';
+			break;
+
+		case '--recursive':
+		case '-r':
+			$options[] = 'recursive';
 			break;
 
 		default:

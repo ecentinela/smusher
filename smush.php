@@ -26,6 +26,7 @@ Class smush {
 		$regexp = in_array('gifs', $options) ? '/\.(jpg|jpeg|png|gif)$/i' : '/\.(jpg|jpeg|png)$/i';
 		$quiet = in_array('quiet', $options);
 		$pretend = in_array('pretend', $options);
+		$recursive = in_array('recursive', $options);
 
 		// create the curl object
 		$curl = curl_init(self::url);
@@ -40,7 +41,7 @@ Class smush {
 		$fn = is_dir($path) ? 'folder' : 'file';
 
 		// call the method
-		call_user_func('smush::' . $fn, $curl, $path, $regexp, $quiet, $pretend);
+		call_user_func('smush::' . $fn, $curl, $path, $regexp, $quiet, $pretend, $recursive);
 
 		// close curl to free memory
 		curl_close($curl);
@@ -48,7 +49,7 @@ Class smush {
 
 	/*
 	*/
-	private static function folder($curl, $path, $regexp, $quiet, $pretend) {
+	private static function folder($curl, $path, $regexp, $quiet, $pretend, $recursive) {
 		// loop through all files on the folder to get images
 		$it = new DirectoryIterator($path);
 
@@ -56,8 +57,10 @@ Class smush {
 			$path = $file->getPathname();
 
 			// if it's a folder, scan it too
-			if ($file->isDir() && !$file->isDot())
-				self::folder($curl, $path, $regexp, $quiet, $pretend);
+			if ($file->isDir() && !$file->isDot()) {
+				if ($recursive)
+					self::folder($curl, $path, $regexp, $quiet, $pretend, $recursive);
+			}
 			// smush jpg, jpeg and png images
 			// gif images are converted to gifs if option is setted
 			elseif (preg_match($regexp, $path)) {

@@ -23,6 +23,7 @@ Options are:
     -q, --quiet                      no output
     -c, --convert-gifs               convert the given gif file or all .gif`s in the given folder
     -p, --pretend                    no changes are made
+    -r, --recursive                  execute the action on all subdirectories
 
 
 Protection

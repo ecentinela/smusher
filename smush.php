@@ -74,7 +74,7 @@ Class smush {
 	private static function file($curl, $path, $regexp, $quiet, $pretend) {
 		// check that the file exists
 		if (!file_exists($path))
-			trigger_error('Invalid file path: ' . $path, E_USER_ERROR);
+			throw new Exception('Invalid file path: ' . $path);
 		// check it is a valid field
 		elseif (preg_match($regexp, $path)) {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, array(

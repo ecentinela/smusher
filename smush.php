@@ -53,23 +53,25 @@ Class smush {
 		// loop through all files on the folder to get images
 		$it = new DirectoryIterator($path);
 
-		foreach ($it as $file) {
-			$path = $file->getPathname();
+		foreach ($it as $file)
+			// ignore the dot file
+			if (!$file->isDot()) {
+				$path = $file->getPathname();
 
-			// if it's a folder, scan it too
-			if ($file->isDir() && !$file->isDot()) {
-				if ($recursive)
-					self::folder($curl, $path, $regexp, $quiet, $pretend, $recursive);
-			}
-			// smush jpg, jpeg and png images
-			// gif images are converted to gifs if option is setted
-			elseif (preg_match($regexp, $path)) {
-				self::file($curl, $path, $regexp, $quiet, $pretend);
+				// if it's a folder, scan it too
+				if ($file->isDir()) {
+					if ($recursive)
+						self::folder($curl, $path, $regexp, $quiet, $pretend, $recursive);
+				}
+				// smush jpg, jpeg and png images
+				// gif images are converted to gifs if option is setted
+				elseif (preg_match($regexp, $path)) {
+					self::file($curl, $path, $regexp, $quiet, $pretend);
 
-				if (!$quiet)
-					echo "\n";
+					if (!$quiet)
+						echo "\n";
+				}
 			}
-		}
 	}
 
 	/*
